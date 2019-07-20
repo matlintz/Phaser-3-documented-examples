@@ -2,6 +2,8 @@ class SpriteSpaceShipScene extends Phaser.Scene {
 
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
     private spaceship: Phaser.Physics.Arcade.Sprite;
+    private pointer: Phaser.Input.Pointer;
+    private touch: Phaser.Input.Pointer;
     constructor() {
         super({
             key: 'SpriteSpaceShipScene'
@@ -18,21 +20,21 @@ class SpriteSpaceShipScene extends Phaser.Scene {
         this.spaceship = this.physics.add.sprite(this.game.scale.parentSize.width / 2, this.game.scale.parentSize.height / 2, 'ship');
         this.spaceship.setDrag(35);//https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Components.Drag.html#setDrag
         let menuItem: Phaser.GameObjects.Text = this.add.text(15, 15, "Home", { fontFamily: 'Verdana, "Times New Roman", Tahoma, serif', fontSize: 22, color: '#0000ff' });
+        let menuItem: Phaser.GameObjects.Text = this.add.text(15, 15, "Home", { fontFamily: 'Verdana, "Times New Roman", Tahoma, serif', fontSize: 25, color: '#3333ff' });
         menuItem.setInteractive().on('pointerdown', () => { this.scene.start('MenuScene'); });
         this.cursors = this.input.keyboard.createCursorKeys();
         this.spaceship.setCollideWorldBounds(true);
+        this.pointer = this.input.activePointer;//https://photonstorm.github.io/phaser3-docs/Phaser.Input.Pointer.html
+        this.touch = this.input.pointer1;
     }
 
     update() {
-        
-        let pointer: Phaser.Input.Pointer = this.input.activePointer; //https://photonstorm.github.io/phaser3-docs/Phaser.Input.Pointer.html
-        let velocity: Phaser.Math.Vector2 = new Phaser.Math.Vector2();//https://photonstorm.github.io/phaser3-docs/Phaser.Math.Vector2.html
-        if (pointer.isDown) {
-            let angleTo: number = Phaser.Math.Angle.BetweenPoints(this.spaceship, pointer);//https://photonstorm.github.io/phaser3-docs/Phaser.Math.Angle.html#.BetweenPoints__anchor
-            this.physics.velocityFromRotation(angleTo, 150, velocity);//https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.ArcadePhysics.html#velocityFromRotation__anchor
-            this.spaceship.setVelocity(velocity.x, velocity.y);//https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Components.Velocity.html#setVelocity__anchor
-            this.spaceship.rotation = angleTo;
+        if (this.pointer.isDown) {
+            this.SetVelocityAndRotation(this.pointer);
+        } else if (this.touch.isDown) {
+            this.SetVelocityAndRotation(this.touch);
         }
+
         if (this.cursors.left.isDown) {
             this.spaceship.angle -= 1;
         }
@@ -40,12 +42,21 @@ class SpriteSpaceShipScene extends Phaser.Scene {
             this.spaceship.angle += 1
         }
         if (this.cursors.up.isDown) {
+            let velocity: Phaser.Math.Vector2 = new Phaser.Math.Vector2()
             this.physics.velocityFromRotation(this.spaceship.rotation, 150, velocity);
             this.spaceship.setVelocity(velocity.x, velocity.y);
         }
-        if (this.cursors.down.isDown){
+        if (this.cursors.down.isDown) {
             this.spaceship.setVelocity(0);
         }
+    }
+
+    SetVelocityAndRotation(pointer: Phaser.Input.Pointer) {
+        let velocity: Phaser.Math.Vector2 = new Phaser.Math.Vector2()
+        this.spaceship.rotation = Phaser.Math.Angle.BetweenPoints(this.spaceship, pointer);//https://photonstorm.github.io/phaser3-docs/Phaser.Math.Angle.html#.BetweenPoints__anchor
+        this.physics.velocityFromRotation(this.spaceship.rotation, 150, velocity);//https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.ArcadePhysics.html#velocityFromRotation__anchor
+        this.spaceship.setVelocity(velocity.x, velocity.y);//https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Components.Velocity.html#setVelocity__anchor
+      
     }
 }
 
