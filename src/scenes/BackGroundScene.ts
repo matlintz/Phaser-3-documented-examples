@@ -67,9 +67,7 @@ class BackGroundScene extends Phaser.Scene {
 
     SetVelocityAndRotation(pointer: Phaser.Input.Pointer) {
         let velocity: Phaser.Math.Vector2 = new Phaser.Math.Vector2();
-
         let pointerWorld: Phaser.Geom.Point = new Phaser.Geom.Point(pointer.worldX, pointer.worldY);
-        console.log(this.spaceship); console.log(pointer);
         /*
             BetweenPoints seemed to work great in the last example
             But it seemed to fail here in a larger world.
