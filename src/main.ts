@@ -2,6 +2,7 @@ import 'phaser';
 import MenuScene from './scenes/MenuScene';
 import SpriteSpaceShipScene from './scenes/SpriteSpaceShipScene';
 import BackGroundScene from './scenes/BackGroundScene';
+import BulletsScene from './scenes/BulletsScene';
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   parent: 'content',
@@ -19,7 +20,7 @@ const config: Phaser.Types.Core.GameConfig = {
     }
   },
   backgroundColor: "#000000",
-  scene: [MenuScene, SpriteSpaceShipScene,BackGroundScene]
+  scene: [MenuScene, SpriteSpaceShipScene,BackGroundScene,BulletsScene]
 };
 
 let game: Phaser.Game = new Phaser.Game(config);

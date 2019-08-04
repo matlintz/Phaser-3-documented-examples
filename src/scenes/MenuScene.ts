@@ -16,7 +16,9 @@ class MenuScene extends Phaser.Scene {
             .setTintFill(0xff0000,0x00ff00,0x0000ff,0xffffff);
         let items = Array(
             { text: "Sprite movement control (mouse / keyboard)", scene: "SpriteSpaceShipScene" },
-            { text: 'Back Ground Scene', scene: 'BackGroundScene' });
+            { text: 'Back Ground Scene', scene: 'BackGroundScene' },
+            {text: 'Bullets Scene', scene: 'BulletsScene'}
+            );
         items.forEach(item => {
             this.addMenuItem(item);
         });
@@ -36,5 +38,6 @@ class MenuScene extends Phaser.Scene {
 
 
 }
+
 
 export default MenuScene
