@@ -3,6 +3,7 @@ import MenuScene from './scenes/MenuScene';
 import SpriteSpaceShipScene from './scenes/SpriteSpaceShipScene';
 import BackGroundScene from './scenes/BackGroundScene';
 import BulletsScene from './scenes/BulletsScene';
+
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   parent: 'content',
