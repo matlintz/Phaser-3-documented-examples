@@ -23,7 +23,7 @@ class BulletsScene extends Phaser.Scene {
 
         console.log('BulletsScene create');
         this.shipSpeed = 400;
-        console.log(this.shipSpeed);
+     
         this.cameras.main.setBounds(0, 0, 4000, 4000);
         this.physics.world.setBounds(0, 0, 4000, 4000);
         this.add.image(0, 0, 'piaback').setOrigin(0).setScale(8);
