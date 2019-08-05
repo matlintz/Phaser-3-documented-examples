@@ -1,5 +1,5 @@
 import Bullet from '../classes/Bullet';
-class BulletsScene extends Phaser.Scene {
+class CollisionScene extends Phaser.Scene {
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
     private spaceship: Phaser.Physics.Arcade.Sprite;
     private pointer: Phaser.Input.Pointer;
@@ -9,7 +9,7 @@ class BulletsScene extends Phaser.Scene {
 
     constructor() {
         super({
-            key: 'BulletsScene'
+            key: 'CollisionScene'
         });
     }
 
@@ -21,7 +21,7 @@ class BulletsScene extends Phaser.Scene {
     }
     create() {
 
-        console.log('BulletsScene create');
+        console.log('CollisionScene create');
         this.shipSpeed = 400;
      
         this.cameras.main.setBounds(0, 0, 4000, 4000);
@@ -30,9 +30,9 @@ class BulletsScene extends Phaser.Scene {
         this.spaceship = this.physics.add.sprite(this.game.scale.parentSize.width / 2, this.game.scale.parentSize.height / 2, 'ship');
         this.spaceship.setDrag(35);//https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Components.Drag.html#setDrag
         let menuItem: Phaser.GameObjects.Text = this.add.text(15, 15, "Home", { fontFamily: 'Verdana, "Times New Roman", Tahoma, serif', fontSize: 25, color: '#3333ff' });
-        menuItem.setInteractive({ cursor: 'pointer' }).on('pointerdown', () => 
+        menuItem.setInteractive({ cursor: 'pointer' }).on('pointerdown', () => {  menuItem.setInteractive({ cursor: 'pointer' }).on('pointerdown', () => 
         { window.history.replaceState({},'Phaser 3 Examples','/');
-        this.scene.start('MenuScene'); });
+        this.scene.start('MenuScene'); }); });
         menuItem.setScrollFactor(0)
         this.cursors = this.input.keyboard.createCursorKeys();
         this.spaceship.setCollideWorldBounds(true);
@@ -94,4 +94,4 @@ class BulletsScene extends Phaser.Scene {
     }
 }
 
-export default BulletsScene
+export default CollisionScene

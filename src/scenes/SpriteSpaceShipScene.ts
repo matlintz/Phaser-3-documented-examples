@@ -20,7 +20,12 @@ class SpriteSpaceShipScene extends Phaser.Scene {
         this.spaceship = this.physics.add.sprite(this.game.scale.parentSize.width / 2, this.game.scale.parentSize.height / 2, 'ship');
         this.spaceship.setDrag(35);//https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Components.Drag.html#setDrag
         let menuItem: Phaser.GameObjects.Text = this.add.text(15, 15, "Home", { fontFamily: 'Verdana, "Times New Roman", Tahoma, serif', fontSize: 25, color: '#3333ff' });
-        menuItem.setInteractive({ cursor: 'pointer' }).on('pointerdown', () => { this.scene.start('MenuScene'); });
+        menuItem.setInteractive({ cursor: 'pointer' }).on('pointerdown', () => {
+            window.history.replaceState({}, 'Phaser 3 Examples', '/');
+            this.scene.start('MenuScene');
+        });
+        menuItem.setScrollFactor(0) //I believe in Phaser 2 you could lock things to camera with fixedToCamera, https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.Components.ScrollFactor.html#setScrollFactor
+
         this.cursors = this.input.keyboard.createCursorKeys();
         this.spaceship.setCollideWorldBounds(true);
         this.pointer = this.input.activePointer;//https://photonstorm.github.io/phaser3-docs/Phaser.Input.Pointer.html
