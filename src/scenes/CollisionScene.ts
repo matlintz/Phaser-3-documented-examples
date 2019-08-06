@@ -16,8 +16,8 @@ class CollisionScene extends Phaser.Scene {
     preload() {
         this.load.image('ship', 'assets/sh2.png');
         this.load.image('bullet', 'assets/bullet6.png');
-        //reduced quality and size of original from https://www.jpl.nasa.gov/images/spitzer/20110210/pia13845-full.jpg
-        this.load.image('piaback', 'assets/pia13845.png');
+        //reduced quality and size of original from https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA13452_hires.jpg
+        this.load.image('piaback', 'assets/PIA13452_lores.jpg');
     }
     create() {
 
@@ -26,7 +26,7 @@ class CollisionScene extends Phaser.Scene {
      
         this.cameras.main.setBounds(0, 0, 4000, 4000);
         this.physics.world.setBounds(0, 0, 4000, 4000);
-        this.add.image(0, 0, 'piaback').setOrigin(0).setScale(8);
+        this.add.image(0, 0, 'piaback').setOrigin(0).setScale(4);
         this.spaceship = this.physics.add.sprite(this.game.scale.parentSize.width / 2, this.game.scale.parentSize.height / 2, 'ship');
         this.spaceship.setDrag(35);//https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Components.Drag.html#setDrag
         let menuItem: Phaser.GameObjects.Text = this.add.text(15, 15, "Home", { fontFamily: 'Verdana, "Times New Roman", Tahoma, serif', fontSize: 25, color: '#3333ff' });
