@@ -22,34 +22,37 @@ class MenuScene extends Phaser.Scene {
             { text: 'Bullets Scene', scene: 'BulletsScene', description: 'Phaser 3 Sprite with Shooting Bullets Example. <a href="https://mobsor.com/blog/2019/08/phaser-3-sprite-with-shooting-bullets-example/">Blog: Sprite with Shooting Bullets </a>' },
             { text: 'Collision Scene', scene: 'CollisionScene', description: 'Phaser 3 Collision Scene, not ready for this realease just a copy of BulletsScene for now' }
         );
+
         this.items.forEach(item => {
             this.addMenuItem(item);
         });
+
         let urlParts = window.location.href.split('#');
         if (urlParts[1] && urlParts[1].length > 0) {
 
             this.loadSceneFromUrl(urlParts[1])
         }
     }
+
     loadSceneFromUrl(part: string) {
-        this.items.forEach((item) => {
+        this.items.forEach((item:{ text: string, scene: string, description: string }) => {
             if (item.scene.toLowerCase() === part.toLowerCase()) {
-                
                 this.textDescription.innerHTML = item.description;
                 this.scene.start(item.scene);
             }
         });
     }
-    addMenuItem(menuItem: { text: string, scene: string, description:string }): void {
 
+    addMenuItem(menuItem: { text: string, scene: string, description:string }): void {
         let y: number = 100;
         y += (this.menuItems.length * 50);
         let item: Phaser.GameObjects.Text = this.add.text(this.game.scale.parentSize.width / 2 - 275, y, menuItem.text, { fontFamily: 'Verdana, "Times New Roman", Tahoma, serif', fontSize: 32, color: '#ffffff' });
         item.setInteractive({ cursor: 'pointer' }).on('pointerdown', () => {
-            window.history.replaceState({}, 'Phaser 3 Examples ' + menuItem.text, '/' + '#' + menuItem.scene);
+            window.history.replaceState({}, 'Phaser 3 Examples ' + menuItem.text, './' + '#' + menuItem.scene);
             this.textDescription.innerHTML = menuItem.description;
-            this.scene.start(menuItem.scene);
+            this.scene.start(menuItem.scene); 
         });
+
         this.menuItems.push(item);
     }
 }
