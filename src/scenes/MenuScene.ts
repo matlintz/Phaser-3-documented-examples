@@ -20,7 +20,7 @@ class MenuScene extends Phaser.Scene {
             { text: "Sprite movement control (mouse / keyboard)", scene: "SpriteSpaceShipScene", description: 'Phaser 3 Sprite Space Ship. <a href="https://mobsor.com/blog/2019/07/phase-3-examples-project-sprite-control-example/">Phase 3 Examples Project – Sprite Control Example</a>' },
             { text: 'Back Ground Scene', scene: 'BackGroundScene', description: 'Phaser 3 Adding a Background Image Scene. <a href="https://mobsor.com/blog/2019/07/phaser-3-adding-a-back-ground-image-scene/">Blog: Phaser 3 Adding a Background Image Scene</a>' },
             { text: 'Bullets Scene', scene: 'BulletsScene', description: 'Phaser 3 Sprite with Shooting Bullets Example. <a href="https://mobsor.com/blog/2019/08/phaser-3-sprite-with-shooting-bullets-example/">Blog: Sprite with Shooting Bullets </a>' },
-            { text: 'Toolbar Scene', scene: 'ToolbarScene', description: 'Phaser 3 Toolbar Controls' }
+            { text: 'Toolbar Scene', scene: 'ToolbarScene', description: 'Phaser 3 Toolbar Controls. <a href="https://mobsor.com/blog/2019/09/phaser-3-toolbar-scene-example/">Blog: Phaser 3 Toolbar Scene Example</a>' }
         );
 
         this.items.forEach(item => {
