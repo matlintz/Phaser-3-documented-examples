@@ -4,6 +4,7 @@ class ToolbarScene extends Phaser.Scene {
     private rotateCcw: Phaser.GameObjects.Image;
     private rotateCw: Phaser.GameObjects.Image;
     private windmill: Phaser.GameObjects.Image;
+    private windmill2: Phaser.GameObjects.Image;
     constructor() {
         super({
             key: 'ToolbarScene'
@@ -47,7 +48,15 @@ class ToolbarScene extends Phaser.Scene {
             this.x = dragX;
             this.y = dragY;
         });
-
+        this.windmill2 = this.add.image(screen.width / 2, screen.height / 2, 'windmill');
+        this.windmill2.setInteractive();
+        this.input.setDraggable(this.windmill2);
+        //pointer isn't used but in testing it is required or things go wrong. using _pointer to avoid the warning of unused parameter.
+        
+        this.windmill2.on('drag', function (_pointer: Phaser.Input.Pointer, dragX: number, dragY: number) {
+            this.x = dragX;
+            this.y = dragY;
+        });
         this.rotateCcw.on('pointerdown', function () {
             this.windmill.angle -= 1;
         }, this); //binding to this as we need to access outside of rotateCcw
